@@ -5,6 +5,7 @@ import pygame
 from Button import Button
 from input_text_box import InputBox
 from confirm_username_password import confirm
+from gamedifficulty_choose_window import *
 #注册界面，在confirm()上需要等待套接字编程进一步修改，其余内容无误
 def register_window(screen,background,bg_color):
 	clock = pygame.time.Clock()
@@ -19,12 +20,15 @@ def register_window(screen,background,bg_color):
 	text = font_big.render("Register",True,(50,150,255))#设定文本与颜色
 	text_name = font_small.render("User Name:", True, (50,150,255))
 	text_password = font_small.render("Password:", True, (50,150,255))
-	text_check = font_small.render("Password Again:", True, (50,150,255))	
+	text_check = font_small.render("Password Again:", True, (50,150,255))
+	hint = ''
+	text_hint = font_small.render(hint, True, (255,0,0))	
 	center = (background.get_width()/2, background.get_height()/2-100)#get the corrdinates of the center
 	textposition_big = text.get_rect(center = center)
 	textposition_name = text.get_rect(center = (120,320))
 	textposition_pass = text.get_rect(center = (133,370))
 	textposition_check = text.get_rect(center = (80,420))
+	textposition_hint = text.get_rect(center = (222,290))
 	name_box = InputBox(175, 300, 213, 32,0,'< 17 characters')
 	password_box = InputBox(175, 350, 213, 32,1,'< 17 characters')
 	check_box = InputBox(175, 400,213,32,1,'check password')
@@ -34,6 +38,7 @@ def register_window(screen,background,bg_color):
 		background.blit(text_name, textposition_name)
 		background.blit(text_password, textposition_pass)	
 		background.blit(text_check, textposition_check)
+		background.blit(text_hint,textposition_hint)
 		button_back.render(screen)#show the button
 		button_confirm.render(screen)#show the button
 		screen.blit(background,(0,0))#paste background to the screen
@@ -72,8 +77,9 @@ def register_window(screen,background,bg_color):
 				name_box.active = False
 				password_box.active = False
 				check_box.active = False
-				flag = False
+				# flag = False
 				background.fill(bg_color)
+				return
 			if register_event.type == pygame.MOUSEBUTTONDOWN and \
 			password_box.rect.collidepoint(register_event.pos) == False and \
 			name_box.rect.collidepoint(register_event.pos) == False and \
@@ -83,8 +89,21 @@ def register_window(screen,background,bg_color):
 				name_box.active = False
 				password_box.active = False
 				check_box.active = False
-				flag = confirm(name_box.text, password_box.text, check_box.text, 1)
-				background.fill(bg_color)
+				result = confirm(name_box.text, password_box.text, check_box.text, 1)
+				print('result= ', result)
+				if result == 2:
+					hint = 'Passwords not consistant'
+					text_hint = font_small.render(hint, True, (255,0,0))
+				elif result == 3:
+					hint = 'Username has been taken'
+					text_hint = font_small.render(hint, True, (255,0,0))
+				elif result == 4:
+					hint = 'Havn\'t enter every box'
+					text_hint = font_small.render(hint, True, (255,0,0))
+				elif result == 1:
+					background.fill(bg_color)
+					gamedifficulty_choose_window(screen, background, bg_color, name_box.text)
+					return
 				# print(name_box.text)
 			if register_event.type == pygame.MOUSEBUTTONDOWN and \
 			password_box.rect.collidepoint(register_event.pos) == False and \
@@ -107,6 +126,7 @@ def register_window(screen,background,bg_color):
 		background.blit(text_name, textposition_name)
 		background.blit(text_password, textposition_pass)
 		background.blit(text_check, textposition_check)
+		background.blit(text_hint,textposition_hint)
 		for box in input_boxes:
 			box.draw(screen,background)
 

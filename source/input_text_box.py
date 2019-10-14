@@ -53,10 +53,6 @@ class InputBox:
         self.txt_surface = FONT.render(self.appearance_text, True, self.color)
     
 
-    def update(self):
-        # Resize the box if the text is too long.
-        width = max(200, self.txt_surface.get_width()+10)
-        self.rect.w = width
 
     def draw(self, screen,background):
         # Blit the text.

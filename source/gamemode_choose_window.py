@@ -3,12 +3,14 @@
 import sys
 import pygame
 from Button import Button
-# from solo_game import solo_game
+from solo_game import solo_game
+from gamedifficulty_choose_window import*
 #登录和注册成功后显示，被register_window和login_window调用
 #调用了solo_game和dual_game
 
 def gamemode_choose_window(screen, background, bg_color):
 	screen.fill(bg_color)
+	screen = pygame.display.set_mode((400,500),0,32)
 	pygame.display.set_caption("Choose game mode")
 	button_back = Button('Graphs/back_btn_on.png','Graphs/back_btn_off.png',(25,25))
 	button_solo = Button('Graphs/solo_btn_on.png','Graphs/solo_btn_off.png',(200,300))
@@ -35,7 +37,8 @@ def gamemode_choose_window(screen, background, bg_color):
 				flag = False
 				background.fill(bg_color)
 			if event.type == pygame.MOUSEBUTTONDOWN and button_solo.isOver():
-				print('into solo game')
+				background.fill(bg_color)
+				gamedifficulty_choose_window(screen, background, bg_color)
 			if event.type == pygame.MOUSEBUTTONDOWN and button_dual.isOver():
 				print('into dual game')
 
