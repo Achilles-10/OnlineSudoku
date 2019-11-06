@@ -8,6 +8,7 @@ from rank_window import *
 
 
 def success_window(screen, background, bg_color, seconds, username, holes, difficulty):
+	#initiate
 	clock = pygame.time.Clock()
 	screen.fill((230,230,230))
 	pygame.display.set_caption("Congratulation!")
@@ -20,7 +21,7 @@ def success_window(screen, background, bg_color, seconds, username, holes, diffi
 	textposition = text.get_rect(center = center)
 	timeposition = text.get_rect(center = time_center)
 	
-
+	#create buttons
 	button_back = Button('Graphs/back_btn_on.png','Graphs/back_btn_off.png',(25,25))
 	button_rank = Button('Graphs/rank_btn_on.png','Graphs/rank_btn_off.png',(200,350))
 	while True:
@@ -30,13 +31,16 @@ def success_window(screen, background, bg_color, seconds, username, holes, diffi
 		screen.blit(background,(0,0))
 		button_rank.render(screen)
 
+		#handle events
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
 			if event.type == pygame.MOUSEBUTTONDOWN and button_back.isOver():
+				#if click on return button
 				background.fill(bg_color)
 				return
 			if event.type == pygame.MOUSEBUTTONDOWN and button_rank.isOver():
+				#if click on rank button
 				background.fill(bg_color)
 				rank_window(screen, background, bg_color, seconds, username, holes, difficulty)
 

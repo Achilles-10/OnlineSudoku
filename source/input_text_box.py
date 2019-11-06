@@ -32,18 +32,22 @@ class InputBox:
 
     def handle_event(self, event):
         if self.active and self.text == self.original_text:
+            #when user click the box for the first time
             self.text = ''
         if self.active:
+            #change the color of the box
             self.color = COLOR_ACTIVE
         else:
             self.color = COLOR_INACTIVE
         if event.type == pygame.KEYDOWN and self.active:
             if event.key == pygame.K_RETURN:
-                # print(self.text)
+                #clear the box
                 self.text = ''
             elif event.key == pygame.K_BACKSPACE:
+                #delet on charcter
                 self.text = self.text[:-1]
             elif event.key in full_keyboard_allowed_input and len(self.text) < 16:
+                #add one character
                 self.text += event.unicode
             # Re-render the text.
         if self.safemode and self.text != self.original_text:

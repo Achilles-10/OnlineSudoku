@@ -8,6 +8,7 @@ from confirm_username_password import confirm
 from gamedifficulty_choose_window import *
 #登录界面，在confirm()上需要等待套接字编程进一步修改，其余内容无误
 def login_window(screen,background,bg_color):
+	#inite the window
 	clock = pygame.time.Clock()
 	screen.fill((230,230,230))
 	pygame.display.set_caption("Log in") #window name
@@ -15,6 +16,7 @@ def login_window(screen,background,bg_color):
 	button_confirm = Button('Graphs/confirm_btn_on.png','Graphs/confirm_btn_off.png',(342,415))
 	flag = True
 	background.fill(bg_color)
+	#set the font of the wrods
 	font = pygame.font.Font('Calib.ttf',30)#设定字体
 	font_small = pygame.font.Font('Calib.ttf',20)
 	text = font.render("Log in",True,(50,150,255))#设定文本与颜色
@@ -23,10 +25,12 @@ def login_window(screen,background,bg_color):
 	hint = ''
 	text_hint = font_small.render(hint, True, (255,0,0))
 	center = (background.get_width()/2, background.get_height()/2-100)#get the corrdinates of the center
+	#set the positions of the text
 	textposition = text.get_rect(center = center)
 	textposition_name = text.get_rect(center = (110,320))
 	textposition_pass = text.get_rect(center = (123,370))
 	textposition_hint = text.get_rect(center = (210,290))
+	#create 3 enter boxes
 	name_box = InputBox(175, 300, 213, 32,0,'Username')
 	password_box = InputBox(175, 350, 213, 32,1,'Password')
 	input_boxes = [name_box, password_box]
@@ -39,6 +43,7 @@ def login_window(screen,background,bg_color):
 		button_confirm.render(screen)#show the button
 		screen.blit(background,(0,0))#paste background to the screen
 
+		#handle events
 		for login_event in pygame.event.get():
 			if login_event.type == pygame.QUIT:
 				sys.exit()
@@ -103,6 +108,7 @@ def login_window(screen,background,bg_color):
 		background.blit(text_name, textposition_name)
 		background.blit(text_password, textposition_pass)
 		background.blit(text_hint,textposition_hint)
+		#draw boxes
 		for box in input_boxes:
 			box.draw(screen,background)
 

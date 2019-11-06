@@ -4,6 +4,7 @@ from Button import Button
 import json
 
 def rank_window(screen, background, bg_color, seconds, username, holes, difficulty):
+	#initiate the window
 	screen.fill((230,230,230))
 	rank_sheet = Button('Graphs/rank_sheet.png', 'Graphs/rank_sheet.png', (200,325))
 	sheet_position = (200,250)
@@ -12,7 +13,7 @@ def rank_window(screen, background, bg_color, seconds, username, holes, difficul
 	center = (background.get_width()/2, background.get_height()/2-100)#get the corrdinates of the center
 	textposition = text.get_rect(center = center)
 	button_back = Button('Graphs/back_btn_on.png','Graphs/back_btn_off.png',(25,25))
-
+	#base on the level, display the cpation and open the correct file
 	if difficulty == 1:
 		pygame.display.set_caption("Rank for easy")
 		with open('rank_for_easy.json') as file:
@@ -26,13 +27,18 @@ def rank_window(screen, background, bg_color, seconds, username, holes, difficul
 		with open('rank_for_hard.json') as file:
 			dictionary_of_records = json.load(file)
 	#loading for coming 
+	#reverse the dic to the list 
 	list_of_records = dic_to_list(dictionary_of_records)
+	#add the new record
 	list_of_records.append((username, seconds/holes))
+	#sort the list
 	sorted_list_of_records = sorted(list_of_records,key=lambda t:t[1])
+	#delet the redundant record
 	if len(sorted_list_of_records) > 5:
 		sorted_list_of_records.pop()
 	#list改成dict，将记录写回文档
 	dictionary_of_records = list_to_dic(list_of_records)
+	#write the records to the right file
 	if difficulty == 1:
 		with open('rank_for_easy.json', 'w') as file:
 			json.dump(dictionary_of_records,file)
@@ -47,7 +53,8 @@ def rank_window(screen, background, bg_color, seconds, username, holes, difficul
 	times = []
 	names_render = []
 	times_render = []
-
+	
+	#render the records
 	for tuple in sorted_list_of_records:
 		names.append(tuple[0])
 		times.append(str(round(tuple[1], 2)))
@@ -73,7 +80,7 @@ def rank_window(screen, background, bg_color, seconds, username, holes, difficul
 		rank_sheet.render(screen)
 		screen.blit(background,(0,0))
 
-		
+		#handle events
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()

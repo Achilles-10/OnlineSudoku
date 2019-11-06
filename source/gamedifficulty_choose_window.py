@@ -8,8 +8,10 @@ from solo_game import solo_game
 #调用了solo_game和dual_game
 
 def gamedifficulty_choose_window(screen, background, bg_color, username):
+	#show this window
 	screen.fill(bg_color)
 	pygame.display.set_caption("Choose game level")
+	#load the buttons
 	button_back = Button('Graphs/back_btn_on.png','Graphs/back_btn_off.png',(25,25))
 	button_easy = Button('Graphs/easy_btn_on.png','Graphs/easy_btn_off.png',(200,250))
 	button_medium = Button('Graphs/medium_btn_on.png','Graphs/medium_btn_off.png',(200,350))
@@ -30,13 +32,14 @@ def gamedifficulty_choose_window(screen, background, bg_color, username):
 		button_medium.render(screen)
 		button_hard.render(screen)
 		
-
+		#handle events
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
 			if event.type == pygame.MOUSEBUTTONDOWN and button_back.isOver():
 				background.fill(bg_color)
 				return
+			#according to the choise, enter different level
 			if event.type == pygame.MOUSEBUTTONDOWN and button_easy.isOver():
 				background.fill(bg_color)
 				solo_game(screen, background, bg_color, 1, username)
