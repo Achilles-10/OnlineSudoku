@@ -13,7 +13,7 @@ def run_game():
 		pygame.display.set_caption("Sudoku World") #window name
 		screen = pygame.display.set_mode((400,500),0,32) #window size
 		background = pygame.Surface(screen.get_size())#draw the background
-		bg_color = (230,230,230)#designate the background's color
+		bg_color = (229,229,229)#designate the background's color
 		background.fill(bg_color)
 		font = pygame.font.Font('Calib.ttf',30)#设定字体
 		text = font.render("Welcome to Sudoku World!",True,(50,150,255))#设定文本与颜色
@@ -35,8 +35,5 @@ def run_game():
 				login_window(screen,background,bg_color)
 
 		pygame.display.update()	#update the display
-
-
-
 
 run_game()
