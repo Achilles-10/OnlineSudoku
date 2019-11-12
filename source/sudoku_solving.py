@@ -140,29 +140,6 @@ def update_sudoku_grid(sudoku):  # 以3*3宫格进行更行元素值和其候选
                 raise Exception('grid (row: %d, col: %d) error!' % (row, col))
 
 
-# def out_sudoku(sudoku):
-#     for i in range(len(sudoku)):
-#         print sudoku[i],
-#         if (i + 1) % 9 == 0:
-#             print
-#         elif (i + 1) % 3 == 0:
-#             print '|',
-#         if (i + 1) % 27 == 0 and (i + 1) % 81 != 0:
-#             print '------+-------+------'
-
-
-# def out_candidate(sudoku_candidate):
-#     sudoku = [''.join(map(str, s)) for s in sudoku_candidate]
-#     for i in range(len(sudoku)):
-#         print '%9s' % sudoku[i],
-#         if (i + 1) % 9 == 0:
-#             print
-#         elif (i + 1) % 3 == 0:
-#             print '|',
-#         if (i + 1) % 27 == 0 and (i + 1) % 81 != 0:
-#             print '------------------------------+-------------------------------+------------------------------'
-
-
 def sudoku_solving(sudoku, flag=0):
     '''
     根据数独的两个特性进行求解
