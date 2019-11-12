@@ -114,29 +114,6 @@ def sudoku_puzzle_dibble(sudoku, difficulty):
             # random_index = enable_choice[j]
     return sudoku_dibble
 
-# if __name__ == '__main__':
-#     # sudoku = sudoku_generate_backtracking()
-    
-#     # dibble_sudo = sudoku_puzzle_dibble(sudoku)
-#     # # print(dibble_sudo)
-#     full_result= [[],[],[],[],[],[],[],[],[]]
-#     half_result= [[],[],[],[],[],[],[],[],[]]
-    
-#     # print(sudoku)
-    
-#     # print(full_result[8][8])
-#     for j in range(0,10):
-#       sudoku = sudoku_generate_backtracking()
-    
-#       dibble_sudo = sudoku_puzzle_dibble(sudoku)
-#       # for i in range(0,9):
-#         # full_result[i] = sudoku[i*9 : i * 9 + 9] 
-#         # half_result[i] = dibble_sudo[i*9 : i * 9 + 9] 
-      
-#       if j > 0:
-#         # print(sudoku)
-#         print()
-#         print(dibble_sudo)
       
 
 
