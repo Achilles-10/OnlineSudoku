@@ -6,9 +6,8 @@ from Button import Button
 from input_text_box import InputBox
 from confirm_username_password import confirm
 from gamedifficulty_choose_window import *
-#注册界面
+#注册界面，在confirm()上需要等待套接字编程进一步修改，其余内容无误
 def register_window(screen,background,bg_color):
-	#initiate the window
 	clock = pygame.time.Clock()
 	screen.fill((230,230,230))
 	pygame.display.set_caption("Register") #window name
@@ -18,7 +17,6 @@ def register_window(screen,background,bg_color):
 	background.fill(bg_color)
 	font_big = pygame.font.Font('Calib.ttf',30)#设定字体
 	font_small = pygame.font.Font('Calib.ttf',20)
-	#render the text
 	text = font_big.render("Register",True,(50,150,255))#设定文本与颜色
 	text_name = font_small.render("User Name:", True, (50,150,255))
 	text_password = font_small.render("Password:", True, (50,150,255))
@@ -26,13 +24,11 @@ def register_window(screen,background,bg_color):
 	hint = ''
 	text_hint = font_small.render(hint, True, (255,0,0))	
 	center = (background.get_width()/2, background.get_height()/2-100)#get the corrdinates of the center
-	#set the text's position
 	textposition_big = text.get_rect(center = center)
 	textposition_name = text.get_rect(center = (120,320))
 	textposition_pass = text.get_rect(center = (133,370))
 	textposition_check = text.get_rect(center = (80,420))
 	textposition_hint = text.get_rect(center = (222,290))
-	#create the boxes
 	name_box = InputBox(175, 300, 213, 32,0,'< 17 characters')
 	password_box = InputBox(175, 350, 213, 32,1,'< 17 characters')
 	check_box = InputBox(175, 400,213,32,1,'check password')
@@ -47,7 +43,6 @@ def register_window(screen,background,bg_color):
 		button_confirm.render(screen)#show the button
 		screen.blit(background,(0,0))#paste background to the screen
 		
-		#handle events
 		for register_event in pygame.event.get():
 			if register_event.type == pygame.QUIT:
 				sys.exit()
@@ -94,7 +89,6 @@ def register_window(screen,background,bg_color):
 				name_box.active = False
 				password_box.active = False
 				check_box.active = False
-				#check the information
 				result = confirm(name_box.text, password_box.text, check_box.text, 1)
 				print('result= ', result)
 				if result == 2:

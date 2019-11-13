@@ -8,7 +8,6 @@ from sudoku_generate import *
 from success_window import *
 from pause_window import *
 def solo_game(screen, background, bg_color, difficulty, username):
-	#create cells
 	cell1_1 = SudoCell(64,200,[1,1],0,1)
 	cell1_2 = SudoCell(94,200,[1,2],0,0)
 	cell1_3 = SudoCell(124,200,[1,3],0,0)
@@ -108,7 +107,6 @@ def solo_game(screen, background, bg_color, difficulty, username):
 		   cell8_1, cell8_2, cell8_3, cell8_4, cell8_5, cell8_6, cell8_7, cell8_8, cell8_9,
 		   cell9_1, cell9_2, cell9_3, cell9_4, cell9_5, cell9_6, cell9_7, cell9_8, cell9_9]
 
-	#initiate the window
 	global current_place
 	pygame.init()
 	clock = pygame.time.Clock()
@@ -128,11 +126,10 @@ def solo_game(screen, background, bg_color, difficulty, username):
 	background.blit(text, textposition)#add text to background according to coordiante
 	screen.blit(background,(0,0))
 	pygame.display.flip()
-	#create the buttons
 	button_pause = Button('Graphs/pause_btn_on.png','Graphs/pause_btn_off.png',(375,25))
 	button_back = Button('Graphs/back_btn_on.png','Graphs/back_btn_off.png',(25,25))
-	sudo_result = sudoku_generate_backtracking()# create the sudoku
-	dibble_sudo_result = sudoku_puzzle_dibble(sudo_result, difficulty)#dig holes
+	sudo_result = sudoku_generate_backtracking()
+	dibble_sudo_result = sudoku_puzzle_dibble(sudo_result, difficulty)
 	full_sudo = [[],[],[],[],[],[],[],[],[]]
 	half_sudo = [[],[],[],[],[],[],[],[],[]]
 	holes  = 0
@@ -142,7 +139,6 @@ def solo_game(screen, background, bg_color, difficulty, username):
 	# print(half_sudo)
 	# print(full_sudo)
 	for cell in box:
-		#load the numbers of the sudoku in to 81 cells
 		cell.rect.y -= 50
 		if half_sudo[cell.location[0] - 1][cell.location[1] - 1] != 0:
 			cell.text = str(half_sudo[cell.location[0] - 1][cell.location[1] - 1])
@@ -162,7 +158,6 @@ def solo_game(screen, background, bg_color, difficulty, username):
 		button_pause.render(screen)
 		screen.blit(background, (0,0))
 
-		#handle events
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
@@ -170,15 +165,13 @@ def solo_game(screen, background, bg_color, difficulty, username):
 				background.fill(bg_color)
 				return
 			if event.type == pygame.MOUSEBUTTONDOWN and button_pause.isOver():
-				#if click on pause button
 				before_time = pygame.time.get_ticks()
 				background.fill(bg_color)
 				pause_window(screen, background, bg_color)
 				after_time = pygame.time.get_ticks()
 				pause_time = after_time - before_time
-				general_pause_time += pause_time#make sure the time is correct
+				general_pause_time += pause_time
 			if event.type == pygame.KEYDOWN:
-				#accept keyboard events to adjust the cells' parameters
 				for cell in box:
 					if cell.active:
 						current_place = cell.location.copy()
@@ -194,14 +187,12 @@ def solo_game(screen, background, bg_color, difficulty, username):
 				is_full = False
 		
 		if is_full:
-			#decide if game has finished or not
 			user_ans = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],
 						[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],
 						[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
 			for cell in box:
 				user_ans[cell.location[0] - 1][cell.location[1] - 1] = int(cell.text)
 			if user_ans == full_sudo:
-				#if finished, go to success window
 				background.fill(bg_color)
 				success_window(screen,background,bg_color,seconds, username, holes, difficulty)
 				return

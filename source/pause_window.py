@@ -4,7 +4,6 @@ from Button import Button
 from sudoku_grid import SudoCell
 
 def pause_window(screen, background, bg_color):
-	#create all the sudo cells
 	cell1_1 = SudoCell(64,200,[1,1],0,0)
 	cell1_2 = SudoCell(94,200,[1,2],0,0)
 	cell1_3 = SudoCell(124,200,[1,3],0,0)
@@ -103,7 +102,7 @@ def pause_window(screen, background, bg_color):
 		   cell7_1, cell7_2, cell7_3, cell7_4, cell7_5, cell7_6, cell7_7, cell7_8, cell7_9,
 		   cell8_1, cell8_2, cell8_3, cell8_4, cell8_5, cell8_6, cell8_7, cell8_8, cell8_9,
 		   cell9_1, cell9_2, cell9_3, cell9_4, cell9_5, cell9_6, cell9_7, cell9_8, cell9_9]
-	#iniate this window
+
 	clock = pygame.time.Clock()
 	screen = pygame.display.set_mode((400,500),0,32)
 	screen.fill((230,230,230))
@@ -122,7 +121,7 @@ def pause_window(screen, background, bg_color):
 		background.blit(text, textposition_big)
 		screen.blit(background, (0,0))
 		button_start.render(screen)
-		#handle events
+		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
