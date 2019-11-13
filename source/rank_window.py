@@ -29,10 +29,8 @@ def rank_window(screen, background, bg_color, seconds, username, holes, difficul
 	list_of_records = dic_to_list(dictionary_of_records)
 	list_of_records.append((username, seconds/holes))
 	sorted_list_of_records = sorted(list_of_records,key=lambda t:t[1])
-	print(sorted_list_of_records,'\n',len(sorted_list_of_records))
 	while len(sorted_list_of_records) > 5:
 		sorted_list_of_records.pop()
-		print(sorted_list_of_records)
 	#list改成dict，将记录写回文档
 	dictionary_of_records = list_to_dic(list_of_records)
 	if difficulty == 1:
