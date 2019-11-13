@@ -5,7 +5,7 @@ import pygame
 from Button import Button
 from register_window import register_window
 from login_window import login_window
-#小程序的main函数，调用登录和注册两个函数
+#程序的main函数，调用登录和注册两个函数
 def run_game():
 	pygame.init()
 	
