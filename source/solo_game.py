@@ -13,9 +13,9 @@ for i in range(1,10):
 			extra_x = int((j - 1)/ 3)
 			extra_y = int((i - 1)/ 3)
 			if i == 1 and j == 1:
-				locals()['cell' + str(i) + '_' + str(j)] = SudoCell(64 + (j - 1)*30 + extra_x, 200 + (i - 1) * 30 + extra_y, [i,j], 0, 1)
+				locals()['cell' + str(i) + '_' + str(j)] = SudoCell(64 + (j - 1)*30 + extra_x, 150 + (i - 1) * 30 + extra_y, [i,j], 0, 1)
 			else:
-				locals()['cell' + str(i) + '_' + str(j)] = SudoCell(64 + (j - 1)*30 + extra_x, 200 + (i - 1) * 30 + extra_y, [i,j], 0, 0)
+				locals()['cell' + str(i) + '_' + str(j)] = SudoCell(64 + (j - 1)*30 + extra_x, 150 + (i - 1) * 30 + extra_y, [i,j], 0, 0)
 			box.append(locals()['cell' + str(i) + '_' + str(j)])
 def solo_game(screen, background, bg_color, difficulty, username):
 	global current_place
@@ -50,7 +50,10 @@ def solo_game(screen, background, bg_color, difficulty, username):
 	# print(half_sudo)
 	# print(full_sudo)
 	for cell in box:
-		cell.rect.y -= 50
+		cell.text = ''
+		cell.lock = 0
+
+	for cell in box:
 		if half_sudo[cell.location[0] - 1][cell.location[1] - 1] != 0:
 			cell.text = str(half_sudo[cell.location[0] - 1][cell.location[1] - 1])
 			cell.lock = 1
