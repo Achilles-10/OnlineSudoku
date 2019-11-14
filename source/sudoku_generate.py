@@ -86,7 +86,7 @@ def sudoku_puzzle_dibble(sudoku, difficulty):
         holes = random.randint(25,45)
     else:
         holes = random.randint(45,55)
-    holes = 1#random.randint(35,45)
+    # holes = 1#random.randint(35,45)
     # print("holes", holes)
       # 随机挖取的单元格下标
     while i < holes:
