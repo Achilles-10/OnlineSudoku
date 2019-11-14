@@ -80,12 +80,12 @@ def sudoku_puzzle_dibble(sudoku, difficulty):
     i = 0
     j = 0
     flag = 0
-    # if difficulty == 1:
-    #     holes = random.randint(15,25)
-    # elif difficulty == 2:
-    #     holes = random.randint(25,45)
-    # else:
-    #     holes = random.randint(45,55)
+    if difficulty == 1:
+        holes = random.randint(15,25)
+    elif difficulty == 2:
+        holes = random.randint(25,45)
+    else:
+        holes = random.randint(45,55)
     holes = 1#random.randint(35,45)
     # print("holes", holes)
       # 随机挖取的单元格下标
